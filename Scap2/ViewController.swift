@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseFirestore
+import FirebaseAuth
 
-class ViewController: UIViewController {
+class ViewController: BaseVC {
 
     // MARK: - Outlets
     
@@ -48,16 +51,51 @@ class ViewController: UIViewController {
         
         @IBAction func loginButtonTapped(_ sender: Any) {
             // Handle login logic here
+            guard let email = usernameTextField.text, let password = passwordTextField.text else {
+                print("Invalid email or password")
+                Utility.showPopup(with: "Invalid email or password", on: self)
+                return
+            }
+            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                guard self != nil else { return }
+                if let error = error {
+                    print("Error signing in: \(error.localizedDescription)")
+                    return
+                }
+                
+                // Sign-in successful, update UI or perform other actions
+                print("User signed in successfully!")
+                
+                self?.performSegue(withIdentifier: SEGUE.INTRO_TO_HOME, sender: self)
+                
+            }
         }
         
         @IBAction func resetPasswordButtonTapped(_ sender: Any) {
             // Handle reset password logic here
+            guard let email = usernameTextField.text else {
+                print("Invalid email or password")
+                Utility.showPopup(with: "Invalid email", on: self)
+                
+                return
+            }
+            Auth.auth().sendPasswordReset(withEmail: email) { [weak self] error in
+                guard self != nil else { return }
+                if let error = error {
+                    print("Error resetting password: \(error.localizedDescription)")
+                    return
+                }
+                Utility.showPopup(with: "Password reset email sent successfully!", on: self!)
+                // Password reset email sent successfully, update UI or perform other actions
+                print("Password reset email sent successfully!")
+                
+            }
         }
         
         // MARK: - Private methods
         
         private func configureTextFields() {
-            usernameTextField.placeholder = "Username"
+            usernameTextField.placeholder = "Email"
             passwordTextField.placeholder = "Password"
             passwordTextField.isSecureTextEntry = true
         }
@@ -68,6 +106,10 @@ class ViewController: UIViewController {
             loginButton.layer.cornerRadius = 10
             resetPasswordButton.setTitle("Reset Password", for: .normal)
             resetPasswordButton.setTitleColor(.systemBlue, for: .normal)
+            resetPasswordButton.layer.cornerRadius = 10
+            
+            
+            
         }
 }
 

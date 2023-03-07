@@ -17,6 +17,22 @@
 		BA5DB95C29B7E34F00744ABA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA5DB95B29B7E34F00744ABA /* GoogleService-Info.plist */; };
 		BA5DB95F29B7EBEA00744ABA /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB95E29B7EBEA00744ABA /* SignUpVC.swift */; };
 		BA5DB96129B7EFFB00744ABA /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96029B7EFFB00744ABA /* LoginVC.swift */; };
+		BA5DB96429B7F35300744ABA /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96329B7F35300744ABA /* ChatVC.swift */; };
+		BA5DB96729B7F37A00744ABA /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96629B7F37A00744ABA /* ProfileVC.swift */; };
+		BA5DB97329B7F3F300744ABA /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96A29B7F3ED00744ABA /* UIView.swift */; };
+		BA5DB97429B7F3F300744ABA /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96B29B7F3EE00744ABA /* UIImageView.swift */; };
+		BA5DB97529B7F3F300744ABA /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96C29B7F3EE00744ABA /* CustomTextField.swift */; };
+		BA5DB97629B7F3F300744ABA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96D29B7F3EF00744ABA /* String.swift */; };
+		BA5DB97729B7F3F300744ABA /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96E29B7F3F000744ABA /* CustomButton.swift */; };
+		BA5DB97829B7F3F300744ABA /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96F29B7F3F100744ABA /* UIImage.swift */; };
+		BA5DB97929B7F3F300744ABA /* UnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB97029B7F3F100744ABA /* UnitConverter.swift */; };
+		BA5DB97A29B7F3F300744ABA /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB97129B7F3F200744ABA /* UIColor.swift */; };
+		BA5DB97B29B7F3F300744ABA /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB97229B7F3F300744ABA /* ImageExtension.swift */; };
+		BA5DB98029B7F42B00744ABA /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB97D29B7F42900744ABA /* Reachability.swift */; };
+		BA5DB98129B7F42B00744ABA /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB97E29B7F42A00744ABA /* Utility.swift */; };
+		BA5DB98229B7F42B00744ABA /* PreferenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB97F29B7F42B00744ABA /* PreferenceHelper.swift */; };
+		BA5DB98529B7F48A00744ABA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB98429B7F48A00744ABA /* Constants.swift */; };
+		BA5DB98729B7F4F000744ABA /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB98629B7F4F000744ABA /* BaseVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +50,22 @@
 		BA5DB95B29B7E34F00744ABA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA5DB95E29B7EBEA00744ABA /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		BA5DB96029B7EFFB00744ABA /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		BA5DB96329B7F35300744ABA /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		BA5DB96629B7F37A00744ABA /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		BA5DB96A29B7F3ED00744ABA /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		BA5DB96B29B7F3EE00744ABA /* UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		BA5DB96C29B7F3EE00744ABA /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		BA5DB96D29B7F3EF00744ABA /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		BA5DB96E29B7F3F000744ABA /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		BA5DB96F29B7F3F100744ABA /* UIImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		BA5DB97029B7F3F100744ABA /* UnitConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitConverter.swift; sourceTree = "<group>"; };
+		BA5DB97129B7F3F200744ABA /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		BA5DB97229B7F3F300744ABA /* ImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
+		BA5DB97D29B7F42900744ABA /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		BA5DB97E29B7F42A00744ABA /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		BA5DB97F29B7F42B00744ABA /* PreferenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceHelper.swift; sourceTree = "<group>"; };
+		BA5DB98429B7F48A00744ABA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BA5DB98629B7F4F000744ABA /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +118,12 @@
 		BA5DB94429B7DAEB00744ABA /* Scap2 */ = {
 			isa = PBXGroup;
 			children = (
+				BA5DB98329B7F46D00744ABA /* Constants */,
+				BA5DB97C29B7F3FD00744ABA /* Utility */,
+				BA5DB96929B7F3BD00744ABA /* Extension */,
+				BA5DB96829B7F38C00744ABA /* Validations */,
+				BA5DB96529B7F36300744ABA /* Profile */,
+				BA5DB96229B7F33500744ABA /* OTPChat */,
 				BA5DB95D29B7EBBE00744ABA /* Auth */,
 				BA5DB95B29B7E34F00744ABA /* GoogleService-Info.plist */,
 				BA5DB94529B7DAEB00744ABA /* AppDelegate.swift */,
@@ -106,6 +144,64 @@
 				BA5DB96029B7EFFB00744ABA /* LoginVC.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		BA5DB96229B7F33500744ABA /* OTPChat */ = {
+			isa = PBXGroup;
+			children = (
+				BA5DB96329B7F35300744ABA /* ChatVC.swift */,
+			);
+			path = OTPChat;
+			sourceTree = "<group>";
+		};
+		BA5DB96529B7F36300744ABA /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				BA5DB96629B7F37A00744ABA /* ProfileVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		BA5DB96829B7F38C00744ABA /* Validations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Validations;
+			sourceTree = "<group>";
+		};
+		BA5DB96929B7F3BD00744ABA /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BA5DB96E29B7F3F000744ABA /* CustomButton.swift */,
+				BA5DB96C29B7F3EE00744ABA /* CustomTextField.swift */,
+				BA5DB97229B7F3F300744ABA /* ImageExtension.swift */,
+				BA5DB96D29B7F3EF00744ABA /* String.swift */,
+				BA5DB97129B7F3F200744ABA /* UIColor.swift */,
+				BA5DB96F29B7F3F100744ABA /* UIImage.swift */,
+				BA5DB96B29B7F3EE00744ABA /* UIImageView.swift */,
+				BA5DB96A29B7F3ED00744ABA /* UIView.swift */,
+				BA5DB97029B7F3F100744ABA /* UnitConverter.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		BA5DB97C29B7F3FD00744ABA /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				BA5DB97F29B7F42B00744ABA /* PreferenceHelper.swift */,
+				BA5DB97D29B7F42900744ABA /* Reachability.swift */,
+				BA5DB97E29B7F42A00744ABA /* Utility.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		BA5DB98329B7F46D00744ABA /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				BA5DB98429B7F48A00744ABA /* Constants.swift */,
+				BA5DB98629B7F4F000744ABA /* BaseVC.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,11 +320,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA5DB97929B7F3F300744ABA /* UnitConverter.swift in Sources */,
+				BA5DB97329B7F3F300744ABA /* UIView.swift in Sources */,
+				BA5DB98129B7F42B00744ABA /* Utility.swift in Sources */,
+				BA5DB97629B7F3F300744ABA /* String.swift in Sources */,
+				BA5DB97429B7F3F300744ABA /* UIImageView.swift in Sources */,
+				BA5DB97A29B7F3F300744ABA /* UIColor.swift in Sources */,
+				BA5DB96429B7F35300744ABA /* ChatVC.swift in Sources */,
+				BA5DB98029B7F42B00744ABA /* Reachability.swift in Sources */,
+				BA5DB98229B7F42B00744ABA /* PreferenceHelper.swift in Sources */,
 				BA5DB95F29B7EBEA00744ABA /* SignUpVC.swift in Sources */,
+				BA5DB97529B7F3F300744ABA /* CustomTextField.swift in Sources */,
+				BA5DB96729B7F37A00744ABA /* ProfileVC.swift in Sources */,
 				BA5DB94A29B7DAEB00744ABA /* ViewController.swift in Sources */,
+				BA5DB97729B7F3F300744ABA /* CustomButton.swift in Sources */,
 				BA5DB94629B7DAEB00744ABA /* AppDelegate.swift in Sources */,
+				BA5DB98529B7F48A00744ABA /* Constants.swift in Sources */,
 				BA5DB94829B7DAEB00744ABA /* SceneDelegate.swift in Sources */,
+				BA5DB97829B7F3F300744ABA /* UIImage.swift in Sources */,
 				BA5DB96129B7EFFB00744ABA /* LoginVC.swift in Sources */,
+				BA5DB98729B7F4F000744ABA /* BaseVC.swift in Sources */,
+				BA5DB97B29B7F3F300744ABA /* ImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
