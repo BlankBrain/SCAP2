@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		91C2AD8034792CDE21CB4DDB /* Pods_Scap2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D94D0F45DAB59C1A700DC35 /* Pods_Scap2.framework */; };
 		BA5DB94629B7DAEB00744ABA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB94529B7DAEB00744ABA /* AppDelegate.swift */; };
 		BA5DB94829B7DAEB00744ABA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB94729B7DAEB00744ABA /* SceneDelegate.swift */; };
 		BA5DB94A29B7DAEB00744ABA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB94929B7DAEB00744ABA /* ViewController.swift */; };
 		BA5DB94D29B7DAEB00744ABA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA5DB94B29B7DAEB00744ABA /* Main.storyboard */; };
 		BA5DB94F29B7DAEE00744ABA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5DB94E29B7DAEE00744ABA /* Assets.xcassets */; };
 		BA5DB95229B7DAEE00744ABA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BA5DB95029B7DAEE00744ABA /* LaunchScreen.storyboard */; };
+		BA5DB95C29B7E34F00744ABA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BA5DB95B29B7E34F00744ABA /* GoogleService-Info.plist */; };
+		BA5DB95F29B7EBEA00744ABA /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB95E29B7EBEA00744ABA /* SignUpVC.swift */; };
+		BA5DB96129B7EFFB00744ABA /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB96029B7EFFB00744ABA /* LoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		276E74D0CC43D32D0164F3F9 /* Pods-Scap2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scap2.release.xcconfig"; path = "Target Support Files/Pods-Scap2/Pods-Scap2.release.xcconfig"; sourceTree = "<group>"; };
+		5D94D0F45DAB59C1A700DC35 /* Pods_Scap2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Scap2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E5FEE2BFCA6636660309496 /* Pods-Scap2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Scap2.debug.xcconfig"; path = "Target Support Files/Pods-Scap2/Pods-Scap2.debug.xcconfig"; sourceTree = "<group>"; };
 		BA5DB94229B7DAEB00744ABA /* Scap2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scap2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5DB94529B7DAEB00744ABA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA5DB94729B7DAEB00744ABA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +31,9 @@
 		BA5DB94E29B7DAEE00744ABA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA5DB95129B7DAEE00744ABA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BA5DB95329B7DAEE00744ABA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA5DB95B29B7E34F00744ABA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BA5DB95E29B7EBEA00744ABA /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		BA5DB96029B7EFFB00744ABA /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +41,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				91C2AD8034792CDE21CB4DDB /* Pods_Scap2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68729BD34D9F901B36099F93 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D94D0F45DAB59C1A700DC35 /* Pods_Scap2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6872CFE11B83FC4A51260DC0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8E5FEE2BFCA6636660309496 /* Pods-Scap2.debug.xcconfig */,
+				276E74D0CC43D32D0164F3F9 /* Pods-Scap2.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		BA5DB93929B7DAEB00744ABA = {
 			isa = PBXGroup;
 			children = (
 				BA5DB94429B7DAEB00744ABA /* Scap2 */,
 				BA5DB94329B7DAEB00744ABA /* Products */,
+				6872CFE11B83FC4A51260DC0 /* Pods */,
+				68729BD34D9F901B36099F93 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +86,8 @@
 		BA5DB94429B7DAEB00744ABA /* Scap2 */ = {
 			isa = PBXGroup;
 			children = (
+				BA5DB95D29B7EBBE00744ABA /* Auth */,
+				BA5DB95B29B7E34F00744ABA /* GoogleService-Info.plist */,
 				BA5DB94529B7DAEB00744ABA /* AppDelegate.swift */,
 				BA5DB94729B7DAEB00744ABA /* SceneDelegate.swift */,
 				BA5DB94929B7DAEB00744ABA /* ViewController.swift */,
@@ -67,6 +99,15 @@
 			path = Scap2;
 			sourceTree = "<group>";
 		};
+		BA5DB95D29B7EBBE00744ABA /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				BA5DB95E29B7EBEA00744ABA /* SignUpVC.swift */,
+				BA5DB96029B7EFFB00744ABA /* LoginVC.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +115,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BA5DB95629B7DAEE00744ABA /* Build configuration list for PBXNativeTarget "Scap2" */;
 			buildPhases = (
+				F1A4BCD81279E7D7D9E1404F /* [CP] Check Pods Manifest.lock */,
 				BA5DB93E29B7DAEB00744ABA /* Sources */,
 				BA5DB93F29B7DAEB00744ABA /* Frameworks */,
 				BA5DB94029B7DAEB00744ABA /* Resources */,
+				3F09F5044F86B1EF415EF5A3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA5DB95229B7DAEE00744ABA /* LaunchScreen.storyboard in Resources */,
+				BA5DB95C29B7E34F00744ABA /* GoogleService-Info.plist in Resources */,
 				BA5DB94F29B7DAEE00744ABA /* Assets.xcassets in Resources */,
 				BA5DB94D29B7DAEB00744ABA /* Main.storyboard in Resources */,
 			);
@@ -133,14 +177,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3F09F5044F86B1EF415EF5A3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Scap2/Pods-Scap2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Scap2/Pods-Scap2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Scap2/Pods-Scap2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F1A4BCD81279E7D7D9E1404F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Scap2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BA5DB93E29B7DAEB00744ABA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA5DB95F29B7EBEA00744ABA /* SignUpVC.swift in Sources */,
 				BA5DB94A29B7DAEB00744ABA /* ViewController.swift in Sources */,
 				BA5DB94629B7DAEB00744ABA /* AppDelegate.swift in Sources */,
 				BA5DB94829B7DAEB00744ABA /* SceneDelegate.swift in Sources */,
+				BA5DB96129B7EFFB00744ABA /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +370,7 @@
 		};
 		BA5DB95729B7DAEE00744ABA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8E5FEE2BFCA6636660309496 /* Pods-Scap2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -310,6 +399,7 @@
 		};
 		BA5DB95829B7DAEE00744ABA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 276E74D0CC43D32D0164F3F9 /* Pods-Scap2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
