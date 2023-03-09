@@ -33,6 +33,9 @@
 		BA5DB98229B7F42B00744ABA /* PreferenceHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB97F29B7F42B00744ABA /* PreferenceHelper.swift */; };
 		BA5DB98529B7F48A00744ABA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB98429B7F48A00744ABA /* Constants.swift */; };
 		BA5DB98729B7F4F000744ABA /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5DB98629B7F4F000744ABA /* BaseVC.swift */; };
+		BACE11CD29B816B400A06BB6 /* cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACE11CB29B816B400A06BB6 /* cell.swift */; };
+		BACE11CE29B816B400A06BB6 /* cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BACE11CC29B816B400A06BB6 /* cell.xib */; };
+		BACE11D129B818D500A06BB6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACE11D029B818D500A06BB6 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +69,9 @@
 		BA5DB97F29B7F42B00744ABA /* PreferenceHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceHelper.swift; sourceTree = "<group>"; };
 		BA5DB98429B7F48A00744ABA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BA5DB98629B7F4F000744ABA /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
+		BACE11CB29B816B400A06BB6 /* cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cell.swift; sourceTree = "<group>"; };
+		BACE11CC29B816B400A06BB6 /* cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = cell.xib; sourceTree = "<group>"; };
+		BACE11D029B818D500A06BB6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,7 @@
 		BA5DB94429B7DAEB00744ABA /* Scap2 */ = {
 			isa = PBXGroup;
 			children = (
+				BACE11CF29B818BF00A06BB6 /* Models */,
 				BA5DB98329B7F46D00744ABA /* Constants */,
 				BA5DB97C29B7F3FD00744ABA /* Utility */,
 				BA5DB96929B7F3BD00744ABA /* Extension */,
@@ -149,6 +156,7 @@
 		BA5DB96229B7F33500744ABA /* OTPChat */ = {
 			isa = PBXGroup;
 			children = (
+				BACE11CA29B8167F00A06BB6 /* chatCell */,
 				BA5DB96329B7F35300744ABA /* ChatVC.swift */,
 			);
 			path = OTPChat;
@@ -202,6 +210,23 @@
 				BA5DB98629B7F4F000744ABA /* BaseVC.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		BACE11CA29B8167F00A06BB6 /* chatCell */ = {
+			isa = PBXGroup;
+			children = (
+				BACE11CB29B816B400A06BB6 /* cell.swift */,
+				BACE11CC29B816B400A06BB6 /* cell.xib */,
+			);
+			path = chatCell;
+			sourceTree = "<group>";
+		};
+		BACE11CF29B818BF00A06BB6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BACE11D029B818D500A06BB6 /* Message.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,6 +289,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BACE11CE29B816B400A06BB6 /* cell.xib in Resources */,
 				BA5DB95229B7DAEE00744ABA /* LaunchScreen.storyboard in Resources */,
 				BA5DB95C29B7E34F00744ABA /* GoogleService-Info.plist in Resources */,
 				BA5DB94F29B7DAEE00744ABA /* Assets.xcassets in Resources */,
@@ -333,9 +359,11 @@
 				BA5DB97529B7F3F300744ABA /* CustomTextField.swift in Sources */,
 				BA5DB96729B7F37A00744ABA /* ProfileVC.swift in Sources */,
 				BA5DB94A29B7DAEB00744ABA /* ViewController.swift in Sources */,
+				BACE11CD29B816B400A06BB6 /* cell.swift in Sources */,
 				BA5DB97729B7F3F300744ABA /* CustomButton.swift in Sources */,
 				BA5DB94629B7DAEB00744ABA /* AppDelegate.swift in Sources */,
 				BA5DB98529B7F48A00744ABA /* Constants.swift in Sources */,
+				BACE11D129B818D500A06BB6 /* Message.swift in Sources */,
 				BA5DB94829B7DAEB00744ABA /* SceneDelegate.swift in Sources */,
 				BA5DB97829B7F3F300744ABA /* UIImage.swift in Sources */,
 				BA5DB96129B7EFFB00744ABA /* LoginVC.swift in Sources */,

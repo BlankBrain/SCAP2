@@ -12,7 +12,7 @@ class Utility {
     static var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView();
     static var overlayView = UIView();
     static var mainView = UIView();
-
+    
     static func showPopup(with message: String, on viewController: UIViewController) {
         
         let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
@@ -23,6 +23,56 @@ class Utility {
         
         viewController.present(alertController, animated: true, completion: nil)
     }
+    
+    static func showAlertWithTwoOptions(message: String, exitTitle: String, continueTitle: String, onExit: @escaping () -> Void, onContinue: @escaping () -> Void) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+
+        let exitAction = UIAlertAction(title: exitTitle, style: .default) { _ in
+            onExit()
+        }
+
+        let continueAction = UIAlertAction(title: continueTitle, style: .default) { _ in
+            onContinue()
+        }
+
+        alert.addAction(exitAction)
+        alert.addAction(continueAction)
+
+        if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+            rootViewController.present(alert, animated: true, completion: nil)
+        }
+    }
+
+    static func generateRandomText(length: Int) -> String {
+        let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        return String((0..<length).map{ _ in letters.randomElement()! })
+    }
+    
+    static func shuffleString(input: String) -> String {
+        var shuffled = Array(input)
+        for i in 0..<(shuffled.count - 1) {
+            let j = Int(arc4random_uniform(UInt32(shuffled.count - i))) + i
+            if i != j {
+                shuffled.swapAt(i, j)
+            }
+        }
+        return String(shuffled)
+    }
+    
+   static func generateRandomTimestamp() -> Date {
+       let minYear = 2025
+       let maxYear = 3000
+       let randomYear = Int.random(in: minYear...maxYear)
+       let randomMonth = Int.random(in: 1...12)
+       let randomDay = Int.random(in: 1...31)
+       let randomHour = Int.random(in: 0...23)
+       let randomMinute = Int.random(in: 0...59)
+       let randomSecond = Int.random(in: 0...59)
+       let dateComponents = DateComponents(calendar: Calendar(identifier: .gregorian), timeZone: TimeZone(identifier: "UTC"), era: (randomYear < 0 ? 0 : 1), year: abs(randomYear), month: randomMonth, day: randomDay, hour: randomHour, minute: randomMinute, second: randomSecond)
+       let date = dateComponents.date!
+       return date
+   }
+
     
     static func showLoading(color: UIColor = UIColor.white){
         DispatchQueue.main.async {
@@ -64,7 +114,7 @@ class Utility {
             UIApplication.shared.keyWindow?.viewWithTag(701)?.removeFromSuperview()
         }
     }
-        //MARK: email validator
+    //MARK: email validator
     static func isValidEmail(email: String) -> Bool {
         // Regular expression pattern for validating email addresses
         let pattern = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
@@ -82,7 +132,7 @@ class Utility {
         return !matches.isEmpty
     }
     //MARK: phone validator
-     static func isValidPhoneNumber(phoneNumber: String, min: Int, max: Int) -> Bool {
+    static func isValidPhoneNumber(phoneNumber: String, min: Int, max: Int) -> Bool {
         // Regular expression pattern for validating phone numbers
         let pattern = "^\\d{\(min),\(max)}$"
         

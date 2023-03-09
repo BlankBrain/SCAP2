@@ -51,9 +51,19 @@ class SignUpVC: BaseVC {
 
              // User created successfully, update UI or perform other actions
              print("User created successfully!")
-             if let navController = self?.navigationController {
-                 navController.popToRootViewController(animated: true)
+             let alert = UIAlertController(title: "Success !", message: "Your user account was created successfully", preferredStyle: .alert)
+
+             let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+                 if let navController = self?.navigationController {
+                     navController.popToRootViewController(animated: true)
+                 }
              }
+
+             alert.addAction(okAction)
+
+             self?.present(alert, animated: true, completion: nil)
+
+             
          }
     }
     

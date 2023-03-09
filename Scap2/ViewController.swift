@@ -57,19 +57,30 @@ class ViewController: BaseVC {
                 return
             }
             Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
-                guard self != nil else { return }
+                guard let self = self else { return }
                 if let error = error {
                     print("Error signing in: \(error.localizedDescription)")
                     return
                 }
-                
+
                 // Sign-in successful, update UI or perform other actions
                 print("User signed in successfully!")
-                
-                self?.performSegue(withIdentifier: SEGUE.INTRO_TO_HOME, sender: self)
+                preferenceHelper.setUserId(authResult?.user.email ?? "user 007")
+                self.performSegue(withIdentifier: SEGUE.INTRO_TO_HOME, sender: self)
+
                 
             }
         }
+  
+    
+    
+    
+    @IBAction func SignUpClicked(_ sender: Any) {
+        self.performSegue(withIdentifier: SEGUE.INTRO_TO_SIGNUP, sender: self)
+    }
+    
+    
+    
         
         @IBAction func resetPasswordButtonTapped(_ sender: Any) {
             // Handle reset password logic here
