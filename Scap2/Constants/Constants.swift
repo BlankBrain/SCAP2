@@ -72,12 +72,7 @@ struct PARAMS
     static let  NAME = "name";
     
 }
-////MARK: Messages
-//struct Message {
-//    let sender: String
-//    let message: String
-//    let timestamp: Int
-//}
+
 //MARK: date Format
 struct DateFormat
 {

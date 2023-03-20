@@ -247,7 +247,18 @@ extension ChatVC : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let swipeAction = UIContextualAction(style: .destructive, title: "Hide") { [self] (action, view, completion) in
-            print("hello")
+           
+            getDocumentID(forMessageText: Common.shared.CurrentMessage.text) { result in
+                switch result {
+                case .success(let documentID):
+                    print("Document ID found: \(documentID)")
+                    // Do something with the document ID here
+                    self.updateMessage(id: documentID, newText: self.generatePoop(), newID: self.generatePoop())
+                case .failure(let error):
+                    print("Error getting document ID: \(error.localizedDescription)")
+                    // Handle the error here
+                }
+            }
             completion(true)
         }
         
@@ -281,18 +292,7 @@ extension ChatVC : UITableViewDataSource, UITableViewDelegate {
             print("Error: Invalid row \(indexPath.row) selected")
         }
         print(message.id)
-        //updateMessage(id: Common.shared.DocumentID, newText: generatePoop(), newID: generatePoop())
-        getDocumentID(forMessageText: message.text) { result in
-            switch result {
-            case .success(let documentID):
-                print("Document ID found: \(documentID)")
-                // Do something with the document ID here
-                self.updateMessage(id: documentID, newText: self.generatePoop(), newID: self.generatePoop())
-            case .failure(let error):
-                print("Error getting document ID: \(error.localizedDescription)")
-                // Handle the error here
-            }
-        }
+      
 
         tableView.deselectRow(at: indexPath, animated: true)
     }

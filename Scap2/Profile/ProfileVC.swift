@@ -16,6 +16,7 @@ class ProfileVC: BaseVC {
     
     @IBOutlet weak var TxtCharRoomName: UITextField!
     
+    @IBOutlet weak var lblUsername: UILabel!
     
     
 
@@ -26,6 +27,7 @@ class ProfileVC: BaseVC {
         let hashString = generateRandomHashString(length: 64)
         self.hashString = hashString
         print(hashString)
+        lblUsername.text = preferenceHelper.getUserId()
     }
     
 
