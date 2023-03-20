@@ -25,18 +25,21 @@ class ChatVC: UIViewController {
     let db = Firestore.firestore()
     let senderID = preferenceHelper.getUserId()
     var hashString = ""
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.hidesBackButton = true
-        addRightBarButton()
+        addRightBarButtonItems()
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UINib(nibName: "cell", bundle: nil), forCellReuseIdentifier: "cell")
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
-
-        getMessages()
-
+        
+        getMessages(Room: "messages")
+        
     }
     
     
@@ -48,61 +51,61 @@ class ChatVC: UIViewController {
         
     }
     
-    func getMessages() {
+    func getMessages(Room: String) {
         
         let data = "Hello, world!".data(using: .utf8)!
         self.hashString = generateHashString(data: data)
         
-            db.collection("messages").addSnapshotListener { querySnapshot, error in
-                guard let documents = querySnapshot?.documents else {
-                    print("Error fetching documents: \(String(describing: error))")
-          
-                    return
-                }
-
+        db.collection(Room).addSnapshotListener { querySnapshot, error in
+            guard let documents = querySnapshot?.documents else {
+                print("Error fetching documents: \(String(describing: error))")
                 
-                self.messages = documents.compactMap { document -> Message? in
-                    do {
-                        self.documents.append(document)
-                        return try document.data(as: Message.self)
-                    } catch {
-                        print("Error decoding document into Message: \(error)")
-                        return nil
-                    }
-                }
-                //self.documents = documents
-                self.DocID.removeAll()
-                
-                let unsortedMessages = self.messages
-                self.messages = unsortedMessages.sorted(by: { $0.timestamp < $1.timestamp })
-                
-                for document in documents.sorted(by:  { (doc1, doc2) -> Bool in
-                    let timestamp1 = doc1.data()["timestamp"] as? TimeInterval ?? 0.0
-                    let timestamp2 = doc2.data()["timestamp"] as? TimeInterval ?? 0.0
-                    return timestamp1 < timestamp2 // Sort in descending order
-                }) {
-                    // Process each document here
-                    let data = document.data()
-                    print( "DocumentID: \(document.documentID)")
-                    self.documents.append(document)
-                    self.DocID.append(document.documentID)
-
-                }
-
-                self.tableView.reloadData()
+                return
             }
+            
+            
+            self.messages = documents.compactMap { document -> Message? in
+                do {
+                    self.documents.append(document)
+                    return try document.data(as: Message.self)
+                } catch {
+                    print("Error decoding document into Message: \(error)")
+                    return nil
+                }
+            }
+            //self.documents = documents
+            self.DocID.removeAll()
+            
+            let unsortedMessages = self.messages
+            self.messages = unsortedMessages.sorted(by: { $0.timestamp < $1.timestamp })
+            
+            for document in documents.sorted(by:  { (doc1, doc2) -> Bool in
+                let timestamp1 = doc1.data()["timestamp"] as? TimeInterval ?? 0.0
+                let timestamp2 = doc2.data()["timestamp"] as? TimeInterval ?? 0.0
+                return timestamp1 < timestamp2 // Sort in descending order
+            }) {
+                // Process each document here
+                let data = document.data()
+                print( "DocumentID: \(document.documentID)")
+                self.documents.append(document)
+                self.DocID.append(document.documentID)
+                
+            }
+            
+            self.tableView.reloadData()
         }
+    }
     
     func sendMessage(text: String) {
-            do {
-                let newMessage = Message(id: self.hashString , sender: senderID , text: text, received: false, timestamp: Date())
-                
-                try db.collection("messages").document().setData(from: newMessage)
-                self.TxtMessage.text = ""
-            } catch {
-                print("Error adding message to Firestore: \(error)")
-            }
+        do {
+            let newMessage = Message(id: self.hashString , sender: senderID , text: text, received: false, timestamp: Date())
+            
+            try db.collection("messages").document().setData(from: newMessage)
+            self.TxtMessage.text = ""
+        } catch {
+            print("Error adding message to Firestore: \(error)")
         }
+    }
     func updateMessage(messageID: String, newText: String, newID: String) {
         
         let messageRef = db.collection("messages").document(messageID)
@@ -114,6 +117,7 @@ class ChatVC: UIViewController {
                 print("Error updating message in Firestore: \(error)")
             } else {
                 print("Message updated successfully!")
+                self.getMessages(Room: "messages")
                 self.tableView.reloadData()
             }
         }
@@ -123,44 +127,61 @@ class ChatVC: UIViewController {
         
         let documentRef = db.collection("messages").document(messageID)
         print(" \(db.collection("messages").document(messageID))  Deleted" )
-       
+        
         documentRef.delete { error in
-               if let error = error {
-                   print("Error deleting document: \(error)")
-               } else {
-                   print("Document deleted successfully!")
-               }
-           }
-    }
-
-
-
-    func addRightBarButton() {
-        let button = UIButton(type: .custom)
-        button.setImage(UIImage(systemName: "power"), for: .normal)
-        button.frame = CGRect(x: 0.0, y: 0.0, width: 50, height: 50)
-        button.addTarget(self, action: #selector(buttonPressed(_:)), for: .touchUpInside)
-        let barButtonItem = UIBarButtonItem(customView: button)
-        self.navigationItem.rightBarButtonItem = barButtonItem
-    }
-    @objc func buttonPressed(_ sender: UIButton) {
-        do{
-            try firebaseAuth.signOut()
-            print("Logout successfully from firebase authentication")
-            preferenceHelper.setAuthToken("")
-            if let navController = self.navigationController {
-                navController.popToRootViewController(animated: true)
+            if let error = error {
+                print("Error deleting document: \(error)")
+            } else {
+                print("Document deleted successfully!")
             }
-        }catch let signOutError as NSError {
-            print("Error signing out in: %@", signOutError)
         }
     }
+    func addRightBarButtonItems() {
+        let button1 = UIBarButtonItem(title: "Profile", style: .plain, target: self, action: #selector(button1Tapped))
+        let button2 = UIBarButtonItem(title: "Join Chat", style: .plain, target: self, action: #selector(button2Tapped))
+        
+        navigationItem.rightBarButtonItems = [button1, button2]
+    }
+    
+    @objc func button1Tapped() {
+        // Handle button 1 tap here
+        print("1")
+        self.performSegue(withIdentifier: SEGUE.CHAT_TO_PROFILE, sender: self)
+    }
+    
+    @objc func button2Tapped() {
+        // Handle button 2 tap here
+        print("2")
+        captureImage()
+        
+    }
+    
     @objc private func refreshTableView() {
         tableView.reloadData()
         refreshControl.endRefreshing()
     }
-
-
+    
+    
+    //MARK: Camera code
+    func captureImage() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .camera
+        picker.cameraCaptureMode = .photo
+        present(picker, animated: true, completion: nil)
+    }
+    
+    func readQRCode(from image: UIImage) -> String? {
+        guard let ciImage = CIImage(image: image) else { return nil }
+        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh])
+        let features = detector?.features(in: ciImage)
+        if let feature = features?.first as? CIQRCodeFeature {
+            return feature.messageString
+        }
+        return nil
+    }
+    
+    
 }
 extension ChatVC : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -178,10 +199,10 @@ extension ChatVC : UITableViewDataSource, UITableViewDelegate {
         let time = message.timestamp.formatted(.dateTime.month().day().hour().minute())
         cell.status.text = "sent at \(time) by \(message.sender)"
         //tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-
+        
         return cell
     }
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
@@ -195,24 +216,24 @@ extension ChatVC : UITableViewDataSource, UITableViewDelegate {
         tableView.reloadData()
         return configuration
     }
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         let selectedItem = self.documents[indexPath.row]
-
-            print("Selected item: \(selectedItem)")
-            tableView.deselectRow(at: indexPath, animated: true)
-         
-         print("############")
-         let message = self.messages[indexPath.row]
-         print(message.text)
-         print(self.DocID[indexPath.row])
-         
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedItem = self.documents[indexPath.row]
         
-
-          
-         updateMessage(messageID: selectedItem.documentID , newText: generatePoop(), newID: generatePoop())
+        print("Selected item: \(selectedItem)")
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        print("############")
+        let message = self.messages[indexPath.row]
+        print(message.text)
+        print(self.DocID[indexPath.row])
+        
+        
+        
+        
+        updateMessage(messageID: selectedItem.documentID , newText: generatePoop(), newID: generatePoop())
         // DeleteMessage(messageID: selectedItem.documentID, Index: "\(indexPath.row)")
-         
-        }
+        
+    }
     func generatePoop() -> String{
         let rnd = Utility.generateRandomText(length: 23)
         let poop = Utility.shuffleString(input: rnd)
@@ -225,4 +246,36 @@ extension ChatVC : UITableViewDataSource, UITableViewDelegate {
         let hashString = hash.compactMap { String(format: "%02x", $0) }.joined()
         return String(hashString.prefix(64))
     }
+}
+extension ChatVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[.originalImage] as? UIImage {
+            // Do something with the captured image
+            
+            if let qrCodeText = readQRCode(from: image) {
+                print("QR code text: \(qrCodeText)")
+                Common.shared.qrCodeText = qrCodeText
+                self.messages.removeAll()
+                getMessages(Room: qrCodeText)
+            } else {
+                print("No QR code found in the image.")
+            }
+            
+            
+            
+        }
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
 }

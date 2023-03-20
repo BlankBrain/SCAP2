@@ -225,4 +225,5 @@ class TransitionAnimation {
 //}
 
 
-// MARK: import library from  https://github.com/ashleymills/Reachability.swift 
+// MARK: import library from  https://github.com/ashleymills/Reachability.swift
+

@@ -12,6 +12,8 @@ pod 'Firebase/Auth'
 pod 'Firebase/Database'
 pod 'Firebase/Firestore'
 pod 'FirebaseFirestoreSwift'
+pod 'CryptoSwift', '~> 1.4.0'
+
 
 
 end

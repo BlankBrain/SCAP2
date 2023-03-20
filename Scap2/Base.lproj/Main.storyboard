@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="zTv-ib-VNf">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -214,26 +215,81 @@
                     <connections>
                         <outlet property="TxtMessage" destination="KRT-U1-x4V" id="ZSH-tE-RvR"/>
                         <outlet property="tableView" destination="wh0-vt-36l" id="rMi-rm-B59"/>
+                        <segue destination="fC1-fR-uDV" kind="show" identifier="chatToProfile" id="Gao-wi-lRS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B1w-lm-0Gq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1846.564885496183" y="-35.211267605633807"/>
         </scene>
-        <!--View Controller-->
+        <!--ProfileVC-->
         <scene sceneID="hn2-k8-Uhr">
             <objects>
-                <viewController id="fC1-fR-uDV" sceneMemberID="viewController">
+                <viewController id="fC1-fR-uDV" customClass="ProfileVC" customModule="Scap2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EC5-UB-W9g">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hQI-7a-oJG">
+                                <rect key="frame" x="0.0" y="103" width="393" height="68.666666666666686"/>
+                                <subviews>
+                                    <stackView opaque="NO" tag="10" contentMode="scaleAspectFit" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vLb-UF-YkY">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="34.333333333333336"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create chat room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdf-5q-8A6">
+                                                <rect key="frame" x="0.0" y="0.0" width="132.33333333333334" height="34.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uwt-mY-hcF">
+                                                <rect key="frame" x="142.33333333333337" y="0.0" width="250.66666666666663" height="34.333333333333336"/>
+                                                <color key="backgroundColor" red="0.78703624009999995" green="0.60801011319999998" blue="0.331721127" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Create"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" tag="10" contentMode="scaleAspectFit" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lRG-Tq-ENc">
+                                        <rect key="frame" x="0.0" y="34.333333333333343" width="393" height="34.333333333333343"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join chat room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJY-8B-MCX">
+                                                <rect key="frame" x="0.0" y="0.0" width="113.33333333333333" height="34.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x02-aC-jxA">
+                                                <rect key="frame" x="123.33333333333331" y="0.0" width="204" height="34.333333333333336"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uwm-mr-ssT">
+                                                <rect key="frame" x="337.33333333333331" y="0.0" width="55.666666666666686" height="34.333333333333336"/>
+                                                <color key="backgroundColor" red="0.78703624009999995" green="0.60801011319999998" blue="0.331721127" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Join"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="XlD-YS-e0B"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemMintColor"/>
+                        <constraints>
+                            <constraint firstItem="hQI-7a-oJG" firstAttribute="top" secondItem="XlD-YS-e0B" secondAttribute="top" id="JTz-fM-Uwe"/>
+                            <constraint firstItem="hQI-7a-oJG" firstAttribute="leading" secondItem="XlD-YS-e0B" secondAttribute="leading" id="St6-vg-YPC"/>
+                            <constraint firstItem="hQI-7a-oJG" firstAttribute="centerX" secondItem="EC5-UB-W9g" secondAttribute="centerX" id="j4w-9e-DtA"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="LDZ-to-YYh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wwl-le-vuJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2639" y="-35"/>
+            <point key="canvasLocation" x="2638.9312977099235" y="-35.211267605633807"/>
         </scene>
         <!--Sign UpVC-->
         <scene sceneID="djI-Ku-buk">
