@@ -46,6 +46,7 @@ struct SEGUE
     static let  INTRO_TO_SIGNUP = "introToSignUp"
     static let  SIGNUP_TO_CHAT = "signUpToChat"
     static let  CHAT_TO_PROFILE = "chatToProfile"
+    static let  PROFILE_TO_CHAT = "ProfileToChat"
 
     
 

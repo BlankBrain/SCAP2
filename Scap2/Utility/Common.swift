@@ -13,8 +13,11 @@ class Common {
     //
     
     var qrCodeText:String = ""
-    
-    
+    var currentRoom = "messages"
+    var DocumentID:String = ""
+    var CurrentMessage = Message(id: "", sender: "", text: "", received: false, timestamp: Date())
+
+
     
     
     

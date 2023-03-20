@@ -60,7 +60,6 @@ class SignUpVC: BaseVC {
              }
 
              alert.addAction(okAction)
-
              self?.present(alert, animated: true, completion: nil)
 
              

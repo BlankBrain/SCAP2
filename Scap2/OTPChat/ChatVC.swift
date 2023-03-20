@@ -11,13 +11,13 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 import FirebaseAuth
 
-class ChatVC: UIViewController {
+class ChatVC: BaseVC {
     
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var TxtMessage: UITextField!
     let refreshControl = UIRefreshControl()
-    let firebaseAuth = Auth.auth()
+   // let firebaseAuth = Auth.auth()
     var documents: [DocumentSnapshot] = []
     var messages: [Message] = []
     var DocID = [String]()
@@ -25,6 +25,7 @@ class ChatVC: UIViewController {
     let db = Firestore.firestore()
     let senderID = preferenceHelper.getUserId()
     var hashString = ""
+    
     
     
     
@@ -38,10 +39,10 @@ class ChatVC: UIViewController {
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         
-        getMessages(Room: "messages")
+        getMessages(Room: Common.shared.currentRoom)
         
     }
-    
+ 
     
     @IBAction func sendMessage(_ sender: Any) {
         guard let newMessage = TxtMessage.text else { return
@@ -52,7 +53,7 @@ class ChatVC: UIViewController {
     }
     
     func getMessages(Room: String) {
-        
+   
         let data = "Hello, world!".data(using: .utf8)!
         self.hashString = generateHashString(data: data)
         
@@ -62,9 +63,10 @@ class ChatVC: UIViewController {
                 
                 return
             }
-            
+           
             
             self.messages = documents.compactMap { document -> Message? in
+                
                 do {
                     self.documents.append(document)
                     return try document.data(as: Message.self)
@@ -79,36 +81,66 @@ class ChatVC: UIViewController {
             let unsortedMessages = self.messages
             self.messages = unsortedMessages.sorted(by: { $0.timestamp < $1.timestamp })
             
-            for document in documents.sorted(by:  { (doc1, doc2) -> Bool in
-                let timestamp1 = doc1.data()["timestamp"] as? TimeInterval ?? 0.0
-                let timestamp2 = doc2.data()["timestamp"] as? TimeInterval ?? 0.0
-                return timestamp1 < timestamp2 // Sort in descending order
-            }) {
-                // Process each document here
-                let data = document.data()
-                print( "DocumentID: \(document.documentID)")
-                self.documents.append(document)
-                self.DocID.append(document.documentID)
-                
-            }
+//            for document in documents.sorted(by:  { (doc1, doc2) -> Bool in
+//                let timestamp1 = doc1.data()["timestamp"] as? TimeInterval ?? 0.0
+//                let timestamp2 = doc2.data()["timestamp"] as? TimeInterval ?? 0.0
+//                return timestamp1 < timestamp2 // Sort in descending order
+//            }) {
+//                // Process each document here
+//                let data = document.data()
+//                print( "DocumentID: \(document.documentID)")
+//                self.documents.append(document)
+//                self.DocID.append(document.documentID)
+//                
+//            }
             
             self.tableView.reloadData()
         }
     }
-    
+    func getDocumentID(forMessageText messageText: String, completion: @escaping (Result<String, Error>) -> Void) {
+        db.collection(Common.shared.currentRoom)
+            .whereField("text", isEqualTo: messageText)
+            .getDocuments() { (querySnapshot, error) in
+                if let error = error {
+                    print("Error getting documents: \(error)")
+                    completion(.failure(error))
+                } else {
+                    for document in querySnapshot!.documents {
+                        let documentID = document.documentID
+                        Common.shared.DocumentID = documentID
+                        print("\(documentID) => \(document.data())")
+                        completion(.success(documentID))
+                        return
+                    }
+                    
+                    // If no documents were found, return an error
+                    completion(.failure(NSError(domain: "com.yourdomain.app", code: 0, userInfo: [NSLocalizedDescriptionKey: "No documents found"])))
+                }
+            }
+    }
+
+
+
     func sendMessage(text: String) {
         do {
             let newMessage = Message(id: self.hashString , sender: senderID , text: text, received: false, timestamp: Date())
             
-            try db.collection("messages").document().setData(from: newMessage)
+            try db.collection(Common.shared.currentRoom).document().setData(from: newMessage)
             self.TxtMessage.text = ""
         } catch {
             print("Error adding message to Firestore: \(error)")
         }
     }
-    func updateMessage(messageID: String, newText: String, newID: String) {
+    func updateMessage(id: String, newText: String, newID: String) {
+        guard !id.isEmpty else {
+            print("Error: Document ID is empty")
+            return
+        }
         
-        let messageRef = db.collection("messages").document(messageID)
+        let messageRef = db.collection(Common.shared.currentRoom).document(id)
+        let userid = preferenceHelper.getUserId
+        if(Common.shared.CurrentMessage.sender == userid() ) {
+            
         messageRef.updateData([
             "text": newText,
             "id": newID,
@@ -117,12 +149,16 @@ class ChatVC: UIViewController {
                 print("Error updating message in Firestore: \(error)")
             } else {
                 print("Message updated successfully!")
-                self.getMessages(Room: "messages")
+                self.getMessages(Room: Common.shared.currentRoom)
                 self.tableView.reloadData()
             }
         }
+        }else{
+            Utility.showPopup(with: "You Can not Hide Other People's Message", on: self)
+        }
         
     }
+
     func DeleteMessage(messageID: String, Index: String) {
         
         let documentRef = db.collection("messages").document(messageID)
@@ -145,13 +181,13 @@ class ChatVC: UIViewController {
     
     @objc func button1Tapped() {
         // Handle button 1 tap here
-        print("1")
+     
         self.performSegue(withIdentifier: SEGUE.CHAT_TO_PROFILE, sender: self)
     }
     
     @objc func button2Tapped() {
         // Handle button 2 tap here
-        print("2")
+      
         captureImage()
         
     }
@@ -191,49 +227,76 @@ extension ChatVC : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! cell
-        let selectedDocument = self.documents[indexPath.row]
-        let message = self.messages[indexPath.row]
         
-        
-        cell.message.text = message.text
-        let time = message.timestamp.formatted(.dateTime.month().day().hour().minute())
-        cell.status.text = "sent at \(time) by \(message.sender)"
-        //tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+        if indexPath.row < self.messages.count {
+            let message = self.messages[indexPath.row]
+            cell.message.text = message.text
+            let time = message.timestamp.formatted(.dateTime.month().day().hour().minute())
+            cell.status.text = "sent at \(time) by \(message.sender)"
+        } else {
+            cell.message.text = ""
+            cell.status.text = ""
+        }
         
         return cell
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let swipeAction = UIContextualAction(style: .destructive , title: "") { [self] (action, view, completion) in
+        let swipeAction = UIContextualAction(style: .destructive, title: "Hide") { [self] (action, view, completion) in
+            print("hello")
             completion(true)
         }
         
         swipeAction.backgroundColor = .red
+      
+
+        
         let configuration = UISwipeActionsConfiguration(actions: [swipeAction])
-        tableView.reloadData()
         return configuration
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = self.documents[indexPath.row]
-        
-        print("Selected item: \(selectedItem)")
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        print("############")
-        let message = self.messages[indexPath.row]
-        print(message.text)
-        print(self.DocID[indexPath.row])
-        
-        
-        
-        
-        updateMessage(messageID: selectedItem.documentID , newText: generatePoop(), newID: generatePoop())
-        // DeleteMessage(messageID: selectedItem.documentID, Index: "\(indexPath.row)")
-        
+
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return self.messages.count
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let message = self.messages[indexPath.row]
+        Common.shared.CurrentMessage = message
+        if indexPath.row < self.messages.count {
+            
+            print(message.text)
+            
+            if indexPath.row < self.DocID.count {
+                let documentID = message.id//self.DocID[indexPath.row]
+                
+            } else {
+                print("Error: No document ID \(message.id) found for row \(indexPath.row)")
+            }
+        } else {
+            print("Error: Invalid row \(indexPath.row) selected")
+        }
+        print(message.id)
+        //updateMessage(id: Common.shared.DocumentID, newText: generatePoop(), newID: generatePoop())
+        getDocumentID(forMessageText: message.text) { result in
+            switch result {
+            case .success(let documentID):
+                print("Document ID found: \(documentID)")
+                // Do something with the document ID here
+                self.updateMessage(id: documentID, newText: self.generatePoop(), newID: self.generatePoop())
+            case .failure(let error):
+                print("Error getting document ID: \(error.localizedDescription)")
+                // Handle the error here
+            }
+        }
+
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+
     func generatePoop() -> String{
         let rnd = Utility.generateRandomText(length: 23)
         let poop = Utility.shuffleString(input: rnd)
@@ -257,9 +320,12 @@ extension ChatVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
             if let qrCodeText = readQRCode(from: image) {
                 print("QR code text: \(qrCodeText)")
                 Common.shared.qrCodeText = qrCodeText
+                Common.shared.currentRoom = qrCodeText
                 self.messages.removeAll()
                 getMessages(Room: qrCodeText)
+                tableView.reloadData()
             } else {
+                Utility.showPopup(with: "No QR code found in the image.", on: self)
                 print("No QR code found in the image.")
             }
             
@@ -274,8 +340,10 @@ extension ChatVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
         dismiss(animated: true, completion: nil)
     }
     
-    
-    
+
+   
+
     
     
 }
+
